@@ -40,7 +40,7 @@ const updatePassword=async(req,res)=>{
         if(!isMatch)return res.status(401).json({success:false,message:"To change your password enter your previous password carefully !!"});
         const hashedPassword=await bcrypt.hash(newpassword,12);
         existingUser.password=hashedPassword;
-        let updatedUser=await Admin.findByIdAndUpdate(id,existingUser,{new:true});
+        let updatedUser=await user.findByIdAndUpdate(id,existingUser,{new:true});
         return res.status(201).json({success:true,result:updatedUser,message:'Password changed !!'});
     } catch (error) {
         console.log(error);
